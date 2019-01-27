@@ -1,5 +1,5 @@
 {
-    "name": "node-ejs",
+    "name": "VideoTube-NodeJs",
     "main": "server.js",
     "dependencies": {
         "ejs": "^1.0.0",
