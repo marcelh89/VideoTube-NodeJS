@@ -2,36 +2,39 @@
 // load the things we need
 var express = require('express');
 var app = express();
-let multer = require('multer');
-let upload = multer({ dest: 'uploads/' });
+
+const mysql = require('mysql');
+
+
+
+const db = mysql.createConnection ({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'videotube'
+});
+
+// connect to database
+db.connect((err) => {
+    if (err) {
+        throw err;
+    }
+    console.log('Connected to database');
+});
+global.db = db;
+
+
+
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));     
 
-app.use(express.static(__dirname + '/public'));
+let multer = require('multer');
+let upload = multer({ dest: 'uploads/' });
 
-// use res.render to load up an ejs view file
-
-// index page 
-app.get('/', function(req, res) {
-    res.render('pages/index');
-});
-
-// about page 
-app.get('/about', function(req, res) {
-    res.render('pages/about');
-});
-
-// upload page 
-app.get('/upload', function(req, res) {
-    res.render('pages/upload');
-});
-
-app.post('/upload', upload.single('fileInput'), (req, res) => {
-    console.log('file input data', req.file);
-    console.log('text field data', req.body);
-    res.sendStatus(200);
-  });
+var routes = require('./routes/routes.js');
+routes.assignRoutes(app, upload);
 
 app.listen(8080);
 console.log('8080 is the magic port');

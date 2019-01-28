@@ -1,0 +1,6 @@
+module.exports = {
+    getIndexPage: (req, res) => {
+        res.render('pages/index');
+    },
+};
+
