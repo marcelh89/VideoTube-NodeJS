@@ -4,20 +4,15 @@ var express = require('express');
 var app = express();
 
 const mysql = require('mysql');
+const config = require('./config.json');
 
 
-
-const db = mysql.createConnection ({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'videotube'
-});
+const db = mysql.createConnection (config);
 
 // connect to database
 db.connect((err) => {
     if (err) {
-        throw err;
+        throw err, 'Could not connect to database';
     }
     console.log('Connected to database');
 });
