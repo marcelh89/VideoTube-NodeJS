@@ -1,5 +1,5 @@
 const {getIndexPage} = require('./index');
-const {getUploadPage} = require('./upload');
+const {getUploadPage, processUploadPage} = require('./upload');
 
 
 exports.assignRoutes = function (app, upload) {
@@ -16,9 +16,5 @@ exports.assignRoutes = function (app, upload) {
     // upload page 
     app.get('/upload', getUploadPage );
 
-    app.post('/upload', upload.single('fileInput'), (req, res) => {
-        console.log('file input data', req.file);
-        console.log('text field data', req.body);
-        res.sendStatus(200);
-    });
+    app.post('/upload', upload.single('fileInput'), processUploadPage);
 }
