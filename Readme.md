@@ -9,6 +9,18 @@ which is inspired by the VideoTube project of the udemy course __Make a YouTube 
 Instructions
 ---
 
+1. Copy config.template.json to config.json and fill out database user and password
+    ``` cp config.template.json ```
+
+    ```
+    {
+        "host": "localhost",
+        "user": "<fillout>",
+        "password": "<fillout>",
+        "database": "videotube"
+    }
+    ```
+
 1. Install dependencies
     ``` yarn install ``` or ``` npm install ```
 
